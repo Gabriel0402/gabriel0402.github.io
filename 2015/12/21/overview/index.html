@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular2 初探 | Coding Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Angular2初探盼星星盼月亮终于把angular2 beta盼来了，在beta前一个月快一天一个release都把小G折磨坏了，小G公司用的angular2，然后就跟着Google那些工程师一天一个update，然后还要看update把以前的啥功能break了没，当时改rxjs的api的时候真的是想死的心都有了。还有rxjs带来的各种bug，终于迎来了angular2 beta，码农翻身做主人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2 初探">
+<meta property="og:url" content="http://gabriel0402.github.io/2015/12/21/overview/index.html">
+<meta property="og:site_name" content="Coding Notes">
+<meta property="og:description" content="Angular2初探盼星星盼月亮终于把angular2 beta盼来了，在beta前一个月快一天一个release都把小G折磨坏了，小G公司用的angular2，然后就跟着Google那些工程师一天一个update，然后还要看update把以前的啥功能break了没，当时改rxjs的api的时候真的是想死的心都有了。还有rxjs带来的各种bug，终于迎来了angular2 beta，码农翻身做主人">
+<meta property="og:updated_time" content="2015-12-23T23:31:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2 初探">
+<meta name="twitter:description" content="Angular2初探盼星星盼月亮终于把angular2 beta盼来了，在beta前一个月快一天一个release都把小G折磨坏了，小G公司用的angular2，然后就跟着Google那些工程师一天一个update，然后还要看update把以前的啥功能break了没，当时改rxjs的api的时候真的是想死的心都有了。还有rxjs带来的各种bug，终于迎来了angular2 beta，码农翻身做主人">
+  
+    <link rel="alternative" href="/atom.xml" title="Coding Notes" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">G</a></h1>
+		</hgroup>
+
+		
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Homepage</a></li>
+				        
+							<li><a href="/archives/">Archives</a></li>
+				        
+							<li><a href="/tags/">TagCloud</a></li>
+				        
+							<li><a href="/about/">About</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
+					        
+								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Gabriel0402" title="GitHub"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/3063179/gabriel" title="StackOverflow"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Angular2/" style="font-size: 10px;">Angular2</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">专注于黑科技</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">G</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">G</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Homepage</a></li>
+		        
+					<li><a href="/archives/">Archives</a></li>
+		        
+					<li><a href="/tags/">TagCloud</a></li>
+		        
+					<li><a href="/about/">About</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
+					        
+								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Gabriel0402" title="GitHub"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/3063179/gabriel" title="StackOverflow"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-overview" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/21/overview/" class="article-date">
+  	<time datetime="2015-12-22T07:30:27.000Z" itemprop="datePublished">2015-12-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular2 初探
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Angular2/">Angular2</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Angular2初探">Angular2初探</h2><p>盼星星盼月亮终于把angular2 beta盼来了，在beta前一个月快一天一个release都把小G折磨坏了，小G公司用的angular2，然后就跟着Google那些工程师一天一个update，然后还要看update把以前的啥功能break了没，当时改rxjs的api的时候真的是想死的心都有了。还有rxjs带来的各种bug，终于迎来了angular2 beta，码农翻身做主人，真是这个月最开心的事情了。接下来就是把所有code改好build pass就好。小G用angular已经两年多了，一开始用的angular做了一个officeapp，公司看不错就migrate到angular2的webapp，所以小G是经历过angular1和angular2的人，看过angular1的各种丑和angular2的各种帅。所以这篇文章主要是强推angular2的软文，主要快速上手angular2，介绍一下angular2的主要优势，快速接触angular2的一些语法及Component，Service的用法。还有就是介绍小G最喜欢的rxjs，因为angular2已经基于rxjs了，把所有东西变成stream然后各种神操作。当然一篇blog不足够介绍这么多，所以小G会分以下几块：</p>
+<ol>
+<li>本篇blog会初步介绍angular2的一些简单语法及快速上手。</li>
+<li>下一篇blog会介绍angular form 的用法</li>
+<li>再下一篇blog会介绍angular2里面的dependency injection的主要用法以及用ood的方法来做dom manipulation。</li>
+<li>下下篇最重要会介绍小G最爱的rxjs。</li>
+<li>小G还会写个cheatsheet，关于angular2的主要用法以及rxjs的主要用法。rxjs的主要用法按decision tree的方法展示。<a id="more"></a>
+</li>
+</ol>
+<h2 id="参考资料">参考资料</h2><p>我是第一次见有公司能把framework的文档写的这么好的，google真是给了我惊喜。如果大家不想从头开始写，小G我写了个简单app，囊括了google angular2文档里的tutorial。这里上链接：<br><a href="https://github.com/AngularClass/angular2-webpack-starter" target="_blank" rel="external">Angular 2 quick start</a>. 所以这个app的文件结构是这样的：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">├──angular2/                                    </span><br><span class="line">│   │</span><br><span class="line">│   ├──<span class="keyword">app</span>/                               </span><br><span class="line">│   │   ├──<span class="keyword">boot</span>.ts                          </span><br><span class="line">│   │   ├──<span class="keyword">app</span>.component.ts   </span><br><span class="line">│   │   ├──hero/                  <span class="comment">//这篇博客用   </span></span><br><span class="line">│   │   |   |──hero.component.ts</span><br><span class="line">│   │   ├──hero-<span class="keyword">form</span>/             <span class="comment">//form blog 用</span></span><br><span class="line">│   │   |   ├──hero.ts                         </span><br><span class="line">│   │   |   |──hero-<span class="keyword">form</span>.component.ts</span><br><span class="line">│   │   |   |──hero-<span class="keyword">form</span>.component.html</span><br><span class="line">│   │   ├──hero-<span class="keyword">list</span>/             <span class="comment">//dependency injection 用</span></span><br><span class="line">│   │   |   ├──...</span><br><span class="line">│   ├──index.html</span><br><span class="line">│   ├──package.json   <span class="comment">//用来安装我们需要的库， 以及node的一些命令</span></span><br><span class="line">│   ├──tsconfig.json  <span class="comment">//用来配置typescript</span></span><br><span class="line">│   ├──style.css      <span class="comment">//这个playground的css</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件构成">文件构成</h2><h3 id="package-json">package.json</h3><p>用过前端的都知道，npm拯救了世界。所以我们用angular2的时候肯定也会用上npm来帮我们加各种库。所以对node或者npm熟悉的肯定也知道package.json。 在package.json里面，你可以定义script：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"tsc"</span>: <span class="string">"tsc"</span>,</span><br><span class="line">    <span class="string">"tsc:w"</span>: <span class="string">"tsc -w"</span>,</span><br><span class="line">    <span class="string">"lite"</span>: <span class="string">"lite-server"</span>,</span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"concurrent \"</span>npm <span class="built_in">run</span> tsc:w\<span class="string">" \"</span>npm <span class="built_in">run</span> lite\<span class="string">" "</span></span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure></p>
+<p>在这里你可以设置你一会要用npm跑的命令，以这个为例，如果你跑npm start，那他就会先跑npm run tsc用tsc compile typescript到javascript，然后跑npm run lite跑server来host整个app。<br>还有dependencies和devdepdencies，你可以在里面加你想要使用的库，这样你就可以用npm install安装你所有想要的库。这里有个小trick，如果你想把这个库装到系统里面，就要跑<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> [<span class="keyword">test</span>]</span></span><br></pre></td></tr></table></figure></p>
+<p>如果你只想随便使用一下，就跑：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> [<span class="keyword">test</span>]</span></span><br></pre></td></tr></table></figure></p>
+<p>如果你不仅想用还想加到packge.json里面，那就要使用<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> <span class="comment">--save [test]</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="typescript-json">typescript.json</h3><p>这个文件主要用来配置typescript的compiler，比如用啥target，用啥module，是不是要设置sourcemap，是不是要要设输出路径什么的。小G在这里配置一个输出dist，这样生成的js和map就不会和tsfile合在一起，他们会到一个单独的文件夹，<br>然后index.html会去查找。</p>
+<h3 id="index-html">index.html</h3><p>这个是整个app存在的html支持，angular2说白了还是javascript，它是不能脱离html的存在。所以跟普通的javascript一样，需要html来load这个框架。在这个例子中小G就使用了systemjs，这个库能找到angular2 的入口然后把整个app load出来。<br>当然不仅仅可以使用systemjs，还有一些其他的框架比如webpack，可以bundle你的库让你的库不再成为一团乱麻。不过代价是他会有个很奇怪的build 方式，他有个server来查看你的code的改变然后在memory里面compile typescript然后把编译好的javascript放到memory里面然后用webpack dev server host然后让index.html直接找，这样的坏处是在debug的时候sourcemap很难找。虽然chrome debugger可以很容易解决这个问题。但是其他编译器比如vscode的chrome debugger extension就没有那么智能了。小G曾经尝试用vscode debug angular webpack starter，过程非常痛苦。</p>
+<h3 id="boot">boot</h3><p>Angular2 对于angular1一个最大的进步是所有的东西都模块化了，web component好像变成了现在web technology的一个趋势。比如google正在推崇的polymer就完全使用了web component的思想，他给你很多个component，就像搭积木一样把你要的component下载下来，然后搭起来搭成你想要的一个web app。小G觉得这个想法是很不错，不过小G试了下polymer反应还是有点慢，虽然那些component做的很好看很material design，但是用户体验太慢的话还是不行吧。但是我相信polymer一直在进步，总有一天可以很好的使用它。这个boot等于整个app的入口，在boot.ts里面加入了这个app的root component，然后在index里面用systemjs调用这个boot，就把这个app整个load起来了。具体如下：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">index.html</span><br><span class="line">    |</span><br><span class="line">    |systemjs调用<span class="keyword">boot</span></span><br><span class="line">  <span class="keyword">boot</span></span><br><span class="line">    |<span class="keyword">boot</span>调用模块化<span class="keyword">app</span>的root component</span><br><span class="line">    |</span><br><span class="line">  <span class="keyword">app</span></span><br></pre></td></tr></table></figure></p>
+<p>而boot在调用模块化的component root的时候使用了bootstrap()的函数，我们可以importanglar2/core来得到bootstrap（）这个函数。看到这里大家可能要想为啥不直接用index load app 为啥要通过一个boot呢？确实如果只想做web app，可以直接用systemjs来load app。有boot的原因是因为我们可能不仅仅想做web application，<br>我们还想做native app， 还想做cordova或者ionic的app，这样只需要替换boot其他所有的代码都可以复用，这是angular2的一个很大的改善。angular1里面并没有很好的支持这一个功能。</p>
+<h3 id="app">app</h3><p>正如小G刚才所说，angular2把所有的组建都模块化了，在angular2里面，你的整个app可以变成很多个模块，这些模块可以定义输入输出，也可以继承，可以拼接，这些模块就是不同的component，component之间的通信，数据交换就用service。在小G写的例子里，可以看到就加入了三个模块：hero，hero-form，heros-list。<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">@Component(&#123;</span></span><br><span class="line">    selector: 'my-app',</span><br><span class="line">    template:`</span><br><span class="line">    <span class="variable">&lt; hero&gt;</span><span class="variable">&lt; /hero&gt;</span></span><br><span class="line">    <span class="variable">&lt; hero-form&gt;</span><span class="variable">&lt; /hero-form&gt;</span></span><br><span class="line">    <span class="variable">&lt; heroes-list&gt;</span><span class="variable">&lt; /heroes-list&gt;</span></span><br><span class="line">    `,</span><br><span class="line">    directives:[HeroComponent, HeroFormComponent,HeroesListComponent]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>首先@Component是angular2里面新引进的函数，通过这个函数我们可以设置selector，template，directives，styles等等。当然如果你要使用Component这个函数就要引入库：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;Component&#125; <span class="keyword">from</span> <span class="string">'angular2/core'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>当然还可以引入子模块，用相对路径即可：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;HeroComponent&#125; <span class="keyword">from</span> <span class="string">'./hero/hero.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;HeroFormComponent&#125; <span class="keyword">from</span> <span class="string">'./hero-form/hero-form.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;HeroesListComponent&#125; <span class="keyword">from</span> <span class="string">'./hero-list/heroes-list.component'</span>;</span><br></pre></td></tr></table></figure></p>
+<h4 id="selector">selector</h4><p>主要用来定义外部的模块如何使用这个模块。比如在app.component中selector是my-app，那在外部的index.html里面要load app.component这个模块就要使用<my-app></my-app></p>
+<h4 id="template">template</h4><p>主要用来定义这个模块里面的html结构，他也可以加入内部的模块，比如这个app.component就加入了三个不同的子模块。这样写html是不是好像就像搭积木一样简单了？有一点要注意的是当template引用html的时候需要使用‘`’符号，一般这个符号在键盘上数字键1的左边。<br>在template里还有一个很重要的概念，用过angular1的童鞋都知道怎么在html里面引用controller里面的变量，没错，用{ { } }，在angular2里面也一样。 我们在class里面定义了一个变量，在template里面就可以用{ { } }直接引用。例如：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">	selector:<span class="string">'hero'</span>,</span><br><span class="line">    template: `</span><br><span class="line">          &lt; <span class="keyword">div</span> &gt;&#123;&#123;title&#125;&#125;&lt; /<span class="keyword">div</span> &gt;</span><br><span class="line">       `</span><br><span class="line">&#125;)</span><br><span class="line">export <span class="class"><span class="keyword">class</span> <span class="title">HeroComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> title = <span class="string">'Tour of Heroes'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样可以在template直接引用class里面的title，等于template里面是&lt; div&gt;Tour of Heroes&lt; /div&gt;</p>
+<p>然后你就可以随意改这个变量，然后render出来的html也会跟着改变。<br>另外我在template里面想提到的是@Input @Output factory method以及[(ngModel)]的双向绑定。</p>
+<h5 id="@Input">@Input</h5><p>这个@Input是用来定义模块的输入的，用来让父模块往子模块传递内容：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Component</span>(&#123;</span><br><span class="line">  <span class="attribute">selector</span>: <span class="string">'bank-account'</span>,</span><br><span class="line">  <span class="attribute">template</span>: <span class="built_in">`</span><br><span class="line">    Bank Name: &#123;&#123;bankName&#125;&#125;</span><br><span class="line">    Account Id: &#123;&#123;id&#125;&#125;</span><br><span class="line">  `</span></span><br><span class="line">&#125;)</span><br><span class="line">class BankAccount &#123;</span><br><span class="line">  <span class="variable">@Input</span>() <span class="attribute">bankName</span>: string;</span><br><span class="line">  <span class="variable">@Input</span>(<span class="string">'account-id'</span>) <span class="attribute">id</span>: string;</span><br><span class="line">  <span class="comment">// this property is not bound, and won't be automatically updated by Angular</span></span><br><span class="line">  <span class="attribute">normalizedBankName</span>: string;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">@Component</span>(&#123;</span><br><span class="line">  <span class="attribute">selector</span>: <span class="string">'app'</span>,</span><br><span class="line">  <span class="attribute">template</span>: <span class="built_in">`</span><br><span class="line">     &lt; bank-account bank-name="RBC" account-id="4747"&gt;&lt; bank-account&gt;</span><br><span class="line">  `</span>,</span><br><span class="line">  <span class="attribute">directives</span>: [BankAccount]</span><br><span class="line">&#125;)</span><br><span class="line">class App &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再这个例子中，父模块是app，子模块是BankAccount， 在app中我们想往子模块里面传递back-name和account-id这两个信息，可以通过property的方式最简单直接，而子模块要接受这个property就要用@Input来接收。子模块会在BankAccount里面直接接收传递过来的property。传递的方式可以是驼峰法，也可以直接写在input里面，就如<br>例子里面写的那样。要记住一点的是父模块在引用子模块的时候是用的[]。</p>
+<h5 id="@Output">@Output</h5><p>如果我们的子模块想自定义一些event传递给父模块又该怎么做呢？这时候就要用到@Output了。<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="property">@Directive</span>(&#123;</span><br><span class="line">  <span class="attribute">selector</span>: <span class="string">'interval-dir'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IntervalDir</span> &#123;</span></span><br><span class="line">  <span class="property">@Output</span>() everySecond = <span class="keyword">new</span> EventEmitter();</span><br><span class="line">  <span class="property">@Output</span>(<span class="string">'everyFiveSeconds'</span>) five5Secs = <span class="keyword">new</span> EventEmitter();</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    setInterval(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.everySecond.emit(<span class="string">"event"</span>), <span class="number">1000</span>);</span><br><span class="line">    setInterval(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.five5Secs.emit(<span class="string">"event"</span>), <span class="number">5000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="property">@Component</span>(&#123;</span><br><span class="line">  <span class="attribute">selector</span>: <span class="string">'app'</span>,</span><br><span class="line">  <span class="attribute">template</span>: `<span class="javascript"></span><br><span class="line">    &lt; interval-dir (every-second)=<span class="string">"everySecond()"</span> (every-five-seconds)=<span class="string">"everyFiveSeconds()"</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt; /<span class="attribute">interval-dir</span>&gt;</span></span><br><span class="line">  </span></span>`,</span><br><span class="line">  <span class="attribute">directives</span>: [IntervalDir]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> &#123;</span></span><br><span class="line">  everySecond() &#123; <span class="built_in">console</span>.log(<span class="string">'second'</span>); &#125;</span><br><span class="line">  everyFiveSeconds() &#123; <span class="built_in">console</span>.log(<span class="string">'five seconds'</span>); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为在普通的html里面，比如button我们会有onclick这种event来监听这个button是否被按了，然后angular2也完全允许我们自定义这种event listening的模式，我们可以给任何模块定义这种event，当触发了event之后就会从子模块往父模块传递子模块的信息。</p>
+<p>再这个例子里，父模块是app，子模块是IntervalDir， 然后在子模块定义event触发的条件，比如每隔1s要触发事件，每隔5s要触发事件。然后当父模块监听到这些事件时可以做相应的操作。当然我们如果想传递信息，可以在new EventEmitter()里面加入我们想要传递的东西，然后在使用的时候加入函数的参数里面。比如我们想传递一个<br>test，我们只需要这么改：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">IntervalDir</span> &#123;</span><br><span class="line">  @<span class="type">Output</span><span class="container">()</span> everySecond = new <span class="type">EventEmitter</span><span class="container">(<span class="title">test</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt; interval-dir <span class="container">(<span class="title">every</span>-<span class="title">second</span>)</span>="everySecond<span class="container">(<span class="title">test</span>)</span>" <span class="container">(<span class="title">every</span>-<span class="title">five</span>-<span class="title">seconds</span>)</span>="everyFiveSeconds<span class="container">()</span>"&gt;</span><br><span class="line">everySecond<span class="container">(<span class="title">test</span>)</span> &#123; console.log<span class="container">(<span class="title">test</span>)</span>; &#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>而在这里，父模块在引用子模块的时候是用的()。</p>
+<h5 id="[(ngModel)]">[(ngModel)]</h5><p>最后当然是最经典的angular特有的ngModel双向binding了。而这个特性是&lt; input &gt;特有的。我们注意到了 [(ngModel)] 既有[]也有()。没错它既有Input的特性也有Output的特性。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; <span class="tag">input</span> [(ngModel)]=<span class="string">"hero.name"</span> placeholder=<span class="string">"name"</span> &gt;</span><br></pre></td></tr></table></figure></p>
+<p>在这里，我们在view里面改input里面的内容，hero.name也会跟着改变，而如果我们在class里面改变hero.name在view里面的内容也会跟着改变。然后就是mvvm的世界了。</p>
+<h4 id="directives">directives</h4><p>主要是加入子模块的模块，当我们定义了一个模块之后，如果我们想要它被别的模块使用，必须定义一个出口被别的模块使用，比如app.component这个模块最后就要：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>让angular2知道它是一个AppComponent模块，然后在boot里面可以加入这个模块。同理我也export了HeroComponent，HeroFormComponent以及HeroesListComponent模块。然后在app.component的一开始就import进来，然后就要在directive加入这些模块然后在template才能识别相应的selector。如果<br>不在directive中引入相应的模块，那在compile的时候template就不知道相应的selector是啥就不能正常的render了。</p>
+<h4 id="providers">providers</h4><p>这个主要用来加入service的模块。当我们想在模块之中使用service的时候，和directive相同的道理，我们需要加入provider这样这个模块就知道使用的service的provider。小G在用angular的过程中碰到最多的问题就是missing provider的问题，在angular1中可能是由于service的dependency之间有loop，<br>表示service互相依赖，会有问题。但angular2由于模块化了这个dependency injection的问题得到了很好的解决。如果再碰到这类问题首先要检查模块是否加入了service provider。</p>
+<h4 id="styles">styles</h4><p>这个主要定义这个模块使用的css，不用放到外部的style.css里面。这样这个模块的css完全由自己掌控，是不是方便了很多？</p>
+<p>这整个app的root component介绍完了，这个root component主要功能是加载了其他模块。这个博客还会介绍一个hero component。</p>
+<h3 id="hero_component">hero component</h3><p>这块主要介绍的就是template里面的input和output还有ngFor:<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt; <span class="attribute">li</span> *<span class="attribute">ngFor</span>=<span class="value">"#hero of heroes"</span> </span><br><span class="line">    [<span class="attribute">class.selected</span>]=<span class="value">"hero === selectedHero"</span></span><br><span class="line">    (<span class="attribute">click</span>)=<span class="value">"onSelect(hero)"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt; <span class="attribute">span</span> <span class="attribute">class</span>=<span class="value">"badge"</span>&gt;</span></span><span class="expression">&#123;&#123;<span class="variable">hero.id</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt; /<span class="attribute">span</span>&gt;</span> </span><span class="expression">&#123;&#123;<span class="variable">hero.name</span>&#125;&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt; /<span class="attribute">li</span> &gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>比如我们有一个list的heros，我们可以在html里面用ngFor来循环这个list然后把list里面的英雄输出到html里面。在这里的语法和angular1完全不一样了。在angular1里面，完全没有<em>以及#的符号，但是在angular2里面，</em>和#确实很关键的语法。<br>( <em> )这个在ngFor的前缀表示整个&lt; li &gt;元素以及它的子元素合成一个master模板。如果不想使用( </em> ),ngFor需要被包含在一个template的元素里面：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; <span class="attribute">template</span> <span class="attribute">ngFor</span> #<span class="attribute">hero</span> [<span class="attribute">ngForOf</span>]=<span class="value">"heroes"</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt; <span class="attribute">hero-detail</span> [<span class="attribute">hero</span>]=<span class="value">"hero"</span> &gt;</span><span class="tag">&lt; /<span class="attribute">hero-detail</span> &gt;</span></span><br><span class="line"><span class="tag">&lt; /<span class="attribute">template</span> &gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Angular2还有这个语法的就是<em>ngIf。如果不用(</em>)也需要把ngIf包含在template里面。<br>而在hero前面的( # )表示了hero是一个本地模板变量，整个合起来就是循环heros的list，然后对于每个hero，在&lt; li &gt;&lt; /li &gt;内可以进行操作。<br>从上面的例子还可以看到input和output。只不过这两个都已经在li模块里面集成好了，不需要自己定义。所以对于li这个元素的input，我们可以定义这个li的class的是否被选择。对于li元素的output我们可以定义点击事件监听。然后在这个模块中进行相应的函数操作。</p>
+<h2 id="小结">小结</h2><p>洋洋洒洒这么多，其实angular2的主要知识点有下面几个：</p>
+<ol>
+<li>Angular2的文件结构，typescript的设置，package.json的设置。</li>
+<li>boot的作用，更换boot可以达到复用代码让代码工作在其他framework的作用。</li>
+<li>Angular2是模块化的，自上而下的一个树状结构。每个模块之间可以互相调用，也可以用service互相通信。</li>
+<li>Angular2里面的一些概念，比如Component，Directive，Provider，selector,template, @Input, @Output, [ ( ngModel) ], ngFor, ngIf.</li>
+</ol>
+<p>如果你知道上面这些是咋回事，那差不多可以开始自己写个angular2的app啦。一方面可以在小G的简单app上随便操作看效果，另一方面小G也给个angular2的快速开发app的project：<a href="https://github.com/AngularClass/angular2-webpack-starter" target="_blank" rel="external">angular2-webpack-starter</a>。小G就是用这个来做比较大型的app开发的。这个项目是跟着angular2不断在更新的，比较伤感的是用vscode很难debug。</p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2015/12/21/overview/">Angular2 初探</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 G 的个人博客">G</a></p>
+  <p><span>发布时间:</span>2015年12月21日 - 23时30分</p>
+  <p><span>最后更新:</span>2015年12月23日 - 15时31分</p>
+  <p>
+    <span>原始链接:</span><a class="post-url" href="/2015/12/21/overview/" title="Angular2 初探">http://gabriel0402.github.io/2015/12/21/overview/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://gabriel0402.github.io/2015/12/21/overview/　　作者: G" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.copy-path'); </script>
+</div>
+
+
+
+
+<nav id="article-nav">
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2015/12/13/blog/">
+        博客框架选择以及发布博客
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Angular2初探"><span class="toc-number">1.</span> <span class="toc-text">Angular2初探</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件构成"><span class="toc-number">3.</span> <span class="toc-text">文件构成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json"><span class="toc-number">3.1.</span> <span class="toc-text">package.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typescript-json"><span class="toc-number">3.2.</span> <span class="toc-text">typescript.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-html"><span class="toc-number">3.3.</span> <span class="toc-text">index.html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot"><span class="toc-number">3.4.</span> <span class="toc-text">boot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app"><span class="toc-number">3.5.</span> <span class="toc-text">app</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#selector"><span class="toc-number">3.5.1.</span> <span class="toc-text">selector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#template"><span class="toc-number">3.5.2.</span> <span class="toc-text">template</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#@Input"><span class="toc-number">3.5.2.1.</span> <span class="toc-text">@Input</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#@Output"><span class="toc-number">3.5.2.2.</span> <span class="toc-text">@Output</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#[(ngModel)]"><span class="toc-number">3.5.2.3.</span> <span class="toc-text">[(ngModel)]</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#directives"><span class="toc-number">3.5.3.</span> <span class="toc-text">directives</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#providers"><span class="toc-number">3.5.4.</span> <span class="toc-text">providers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#styles"><span class="toc-number">3.5.5.</span> <span class="toc-text">styles</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hero_component"><span class="toc-number">3.6.</span> <span class="toc-text">hero component</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+  if ($(".toc").length < 1) {
+    $("#toc").css("display","none");
+    $("#tocButton").css("display","none");
+    $(".switch-btn").css("display","block");
+    $(".switch-area").css("display","block");
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+  <div class="duoshuo" id="comments">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/12/21/overview/" data-title="Angular2 初探" data-url="http://gabriel0402.github.io/2015/12/21/overview/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"gabriel0402"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    <div  class="post-nav-button">
+    <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+    <a href="/2015/12/13/blog/" title="下一篇: 博客框架选择以及发布博客">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+    
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2015 G
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+<script>
+  var backgroundnum = 10;
+  var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+
+  $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
