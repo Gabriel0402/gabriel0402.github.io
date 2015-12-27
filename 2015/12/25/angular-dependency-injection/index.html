@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular2 依赖注入 | Coding Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言这是Angular2教程的第三部分，主要介绍Angular2的service的使用，以及ood在angular2里面的实现方式。相关博客如下：
+
+Angular2 初探
+Angular2 表单验证
+Angular2之rxjs以及http的世界
+Angular2 cheatsheet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2 依赖注入">
+<meta property="og:url" content="http://gabriel0402.github.io/2015/12/25/angular-dependency-injection/index.html">
+<meta property="og:site_name" content="Coding Notes">
+<meta property="og:description" content="前言这是Angular2教程的第三部分，主要介绍Angular2的service的使用，以及ood在angular2里面的实现方式。相关博客如下：
+
+Angular2 初探
+Angular2 表单验证
+Angular2之rxjs以及http的世界
+Angular2 cheatsheet">
+<meta property="og:updated_time" content="2015-12-27T04:08:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2 依赖注入">
+<meta name="twitter:description" content="前言这是Angular2教程的第三部分，主要介绍Angular2的service的使用，以及ood在angular2里面的实现方式。相关博客如下：
+
+Angular2 初探
+Angular2 表单验证
+Angular2之rxjs以及http的世界
+Angular2 cheatsheet">
+  
+    <link rel="alternative" href="/atom.xml" title="Coding Notes" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">G</a></h1>
+		</hgroup>
+
+		
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Homepage</a></li>
+				        
+							<li><a href="/archives/">Archives</a></li>
+				        
+							<li><a href="/tags/">TagCloud</a></li>
+				        
+							<li><a href="/about/">About</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="RSS plugin"><a class="RSS plugin" target="_blank" href="http://gabriel0402.github.io/atom.xml" title="RSS plugin"></a></li>
+					        
+								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
+					        
+								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Gabriel0402" title="GitHub"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/3063179/gabriel" title="StackOverflow"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Angular2/" style="font-size: 20px;">Angular2</a> <a href="/tags/Angular2-教程/" style="font-size: 20px;">Angular2 教程</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">专注于黑科技</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">G</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">G</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Homepage</a></li>
+		        
+					<li><a href="/archives/">Archives</a></li>
+		        
+					<li><a href="/tags/">TagCloud</a></li>
+		        
+					<li><a href="/about/">About</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="RSS plugin"><a class="RSS plugin" target="_blank" href="http://gabriel0402.github.io/atom.xml" title="RSS plugin"></a></li>
+					        
+								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
+					        
+								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Gabriel0402" title="GitHub"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/3063179/gabriel" title="StackOverflow"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-angular-dependency-injection" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/25/angular-dependency-injection/" class="article-date">
+  	<time datetime="2015-12-26T04:44:16.000Z" itemprop="datePublished">2015-12-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular2 依赖注入
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Angular2/">Angular2</a><a class="article-category-link" href="/categories/Angular2/依赖注入/">依赖注入</a><a class="article-category-link" href="/categories/Angular2/依赖注入/Angular2-教程/">Angular2 教程</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2-教程/">Angular2 教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/依赖注入/">依赖注入</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="前言">前言</h2><p>这是Angular2教程的第三部分，主要介绍Angular2的service的使用，以及ood在angular2里面的实现方式。相关博客如下：</p>
+<ol>
+<li><a href="http://gabriel0402.github.io/2015/12/21/overview/">Angular2 初探</a></li>
+<li><a href="http://gabriel0402.github.io/2015/12/24/angular2-form/">Angular2 表单验证</a></li>
+<li>Angular2之rxjs以及http的世界</li>
+<li>Angular2 cheatsheet</li>
+</ol>
+<a id="more"></a>
+<h2 id="参考资料">参考资料</h2><p>还是小G上个博客里面介绍的例子，链接在这：<a href="https://github.com/Gabriel0402/angular2_beta_test" target="_blank" rel="external">Angular 2 quick start</a>。文件结构如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">├──angular2/                                    </span><br><span class="line">│   │</span><br><span class="line">│   ├──app/                               </span><br><span class="line">│   │   ├──boot<span class="class">.ts</span>                          </span><br><span class="line">│   │   ├──app<span class="class">.component</span><span class="class">.ts</span>   </span><br><span class="line">│   │   ├──hero-list/             <span class="comment">//依赖注入 用</span></span><br><span class="line">│   │       ├──edit-item<span class="class">.ts</span></span><br><span class="line">│   │       ├──hero-card<span class="class">.component</span><span class="class">.ts</span></span><br><span class="line">│   │       ├──hero-editor<span class="class">.component</span><span class="class">.ts</span></span><br><span class="line">│   │       ├──hero<span class="class">.ts</span></span><br><span class="line">│   │       ├──heros-list<span class="class">.component</span><span class="class">.ts</span></span><br><span class="line">│   │       ├──heroes<span class="class">.service</span><span class="class">.ts</span></span><br><span class="line">│   │       ├──restore<span class="class">.service</span><span class="class">.ts</span></span><br><span class="line">│   ├──index<span class="class">.html</span></span><br><span class="line">│   ├──package<span class="class">.json</span>   <span class="comment">//用来安装我们需要的库， 以及node的一些命令</span></span><br><span class="line">│   ├──tsconfig<span class="class">.json</span>  <span class="comment">//用来配置typescript</span></span><br><span class="line">│   ├──style<span class="class">.css</span>      <span class="comment">//这个playground的css</span></span><br></pre></td></tr></table></figure></p>
+<p>在这篇博客里主要会用到的是hero-list这个模块，这个模块的主要作用做一个可更改的英雄名称，并且带有保存和取消的功能。保存需要保存当前的更改，而取消则需要恢复更改之前的名字，当已经更改了英雄的名称但是取消了之后这个会返回到更改之前的结果。</p>
+<h2 id="依赖注入介绍">依赖注入介绍</h2><p>在OOD中，一般一个class要初始化的时候，construct里面会有这个class需要依赖的class，比如我们要造一辆车，我们需要引擎和轮胎。我们可以这么做：<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Car&#123;</span><br><span class="line">    <span class="keyword">private</span> engine:Engine;</span><br><span class="line">    <span class="keyword">private</span> tires:Tires;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>()</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.engine = <span class="keyword">new</span> Engine();</span><br><span class="line">        <span class="keyword">this</span>.tires=<span class="keyword">new</span> Tires();</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是这并不是一个好的ood的方法，因为一辆车有很多的引擎，有不同的轮胎，每次我们要初始化不同引擎不同轮胎的车我们都要改constructor去使用不同的引擎不同的轮胎。所以这种设计没有可扩展性。所以我们可以一般的OOD的方法是把这个class需要的东西放入constructor的参数中，如<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Car&#123;</span><br><span class="line">    <span class="keyword">private</span> engine:Engine;</span><br><span class="line">    <span class="keyword">private</span> tires:Tires;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>(engine: Engine, tires: Tires) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.engine = engine;</span><br><span class="line">        <span class="keyword">this</span>.tires = tires;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后我们初始化对象的时候，可以这么做:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> car = <span class="keyword">new</span> Car(<span class="keyword">new</span> Engine(), <span class="keyword">new</span> Tires());</span><br></pre></td></tr></table></figure></p>
+<p>这样车的类就基于引擎的类以及轮胎的类，而这也有很好的扩展性，当我们想建造不同的车的时候，我们可以使用不同的引擎以及不同的轮胎，只有在初始化对象的时候需要明确引擎以及轮胎的类就行。在Angular2里面引用了同样地思路。在第一篇博客中提到directive和providers的概念，其中directive是用来包括子模块，但是父模块一般不会使用子模块的逻辑或者方法，子模块对于父模块来说相当于一个有输入输出接口的黑盒，它只给它的父模块一个名字(定义在子模块的selector里)，然后父模块在模板里面引用子模块，并且给予输入输出。然而如果两个模块想共享某些逻辑的时候该如何呢？这时候就用到service的概念了。service就好象c++里面的接口一样，使得不同的模块之间能够通信。但我们需要给让一个模块使用service的时候，有两种方法:</p>
+<ol>
+<li>在bootstrap函数里面加入根模块，然后加上service component。如:<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bootstrap<span class="list">(<span class="keyword">AppComponent</span>, [HeroService])</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样就把这个service加入到整个app里面。然后这个app component包括它所有的子模块都能使用 HeroService这个service。<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     A</span><br><span class="line">     |</span><br><span class="line">B----<span class="keyword">C</span>---<span class="keyword">D</span></span><br><span class="line">|</span><br><span class="line"><span class="keyword">E</span></span><br></pre></td></tr></table></figure></p>
+<p>比如上图这个结构，A是根模块，然后有BCD三个子模块，然后B还有E这个子模块。ABCDE都能使用用bootstrap函数加入的service。但有一点要注意的是，在Angular2里面所有的service是单例的。单例在OOD里面的意思是整个app只能有一个对象，在Angular2里面同样是这个意思，如果把service加在根模块，虽然所有的子模块都共享这个service，但是它产生的service是单例的，只有一个子模块在runtime能使用这个service。这样就会产生一个问题，比如我有一个保存的service用来保存当前值，然后BCD这三个模块都需要保存的功能，但是由于service是单例的，它只能保存一个值，这样就会产生问题。解决办法就是模块使用service的第二种方法:</p>
+<ol>
+<li>在component的providers里面直接加入service，如:<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Component</span>(&#123;</span><br><span class="line">  <span class="attribute">selector</span>: <span class="string">'hero-editor'</span>,</span><br><span class="line">  <span class="attribute">providers</span>: [RestoreService]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后在类的constructor里面加入这个service:<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constructor</span><span class="params">(<span class="keyword">private</span> restoreService: RestoreService&lt;Hero&gt;)</span> <span class="comment">&#123;&#125;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>这样之后虽然每个service是单例的，但是由于每个模块有自己的service，所以这个service互相不干扰，每个模块可以有自己的保存功能。在类里面可以用this.restoreService来使用这个service的实例。<br>而我们在写service的时候，一般没有@Component了，只有一些函数,以及实现逻辑。一般可以做成service的可以是模块之间的信息交流，也可以是模块对外拿data，也可以是一个可扩展可共享的函数逻辑，比如我们要做还原功能，我们可以有一个restore service:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">RestoreService</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  originalItem: T;</span><br><span class="line">  currentItem: T;</span><br><span class="line"></span><br><span class="line">  setItem (item: T) &#123;</span><br><span class="line">    <span class="keyword">this</span>.originalItem = item;</span><br><span class="line">    <span class="keyword">this</span>.currentItem = <span class="keyword">this</span>.clone(item);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getItem () :T &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.currentItem;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  restoreItem () :T &#123;</span><br><span class="line">    <span class="keyword">this</span>.currentItem = <span class="keyword">this</span>.originalItem;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getItem();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  clone (item: T) :T &#123;</span><br><span class="line">    <span class="comment">// super poor clone implementation</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(item));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为每个模块都需要这个service，所以需要用providers来吧service引入到component里面。<br>但如果一个service要用另外一个service应该怎么做呢？由于service是一个类，所以我们并不需要引入providers，我们只需要import相应的子service然后在父service的constructor中加入这个Service，比如如果我们想要在restore service里面加入一个logger service，我们只需要:<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;Logger&#125; from <span class="string">'./logger'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Injectable&#125; from <span class="string">'angular2/angular2'</span>;</span><br><span class="line"></span><br><span class="line">@Injectable()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> RestoreService&lt;T&gt; &#123;</span><br><span class="line">  <span class="constructor"><span class="keyword">constructor</span>(private logger: Logger) </span>&#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  restoreItem () :T &#123;</span><br><span class="line">    <span class="keyword">this</span>.currentItem = <span class="keyword">this</span>.originalItem;</span><br><span class="line">    <span class="keyword">this</span>.logger.log(<span class="string">'this is restore item'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getItem();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有一点要注意是 @Injectable() 这个语法。这个不是可省略的。一定要加入这个@Injectable()，一定要加入这个@Injectable()，一定要加入这个@Injectable()。重要的事情说三遍。因为Angular2需要这个语法来把logger插入到restore service里面，如果没有这个@Injectable(), Angular2就不知道要插入这个Logger service，<br>就会报错。大家可能会有疑问，那为啥在component里面加入restore service的时候不需要加入@Injectable呢？这是因为component已经用@Component表示了，所以在这里可以省略。<br>在依赖注入里面，还有一点是service的provider可以是类，可以是值，也可以是工厂类型。<br>service的provider是类的例子上面已经给出了，如果provider是值的例子如下:<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beforeEachProviders(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  let emptyHeroService = &#123; <span class="attribute">getHeroes</span>: <span class="function"><span class="params">()</span> =&gt;</span> [] &#125;;</span><br><span class="line">  <span class="keyword">return</span> [ provide(HeroService, &#123;<span class="attribute">useValue</span>: emptyHeroService&#125;) ];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这个一般用于Jasmine测试里。<br>如果provider是一个工厂类型，这更符合扩展性的要求。比如我们有A service，依赖于B service，但我们同时在C service某个参数为真时使用这个service，我们就可以这么写:<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let AServiceFactory = <span class="function"><span class="params">(b: B, c: C)</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> HeroService(b, c.isSpecial);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样一来，只有c.isSpecial 是真的时候我们才使用C的service。<br>如果我们要用工厂类型的时候，可以定义一个definition:<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let ADefinition = &#123;</span><br><span class="line">   useFactory: AServiceFactory,</span><br><span class="line">   deps: [B, C]</span><br><span class="line">&#125;<span class="comment">;</span></span><br><span class="line">let AServiceProvider = provide(<span class="keyword">A</span>, ADefinition)<span class="comment">;</span></span><br><span class="line">bootstrap(AppComponent, [AServiceProvider, B, C])<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="具体实例">具体实例</h2><p>在hero-list这个例子中，有两个service，一个是heros.service，用来保存现有的英雄名字以及超能力。如果要扩展可以用restful api来得到英雄的名字以及超能力。另外一个是restore.service,用于保存更改之前的结果，如果按取消就返回保存之前的结果。<br>还有一个hero的类，由于是简单版本，所以只有名字和超能力的元素。<br>接下来是hero-editor.component以及hero-card.component，这两个模块是hero-list.component这个模块的两个子模块，在hero-list.component里面对于每个从heroes.service里面得到的英雄，都包含hero-editor.component来编辑英雄的名字以及hero-card.component<br>来显示更改之后的内容。<br>在hero-list.component里可以看到:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; <span class="attribute">li</span> *<span class="attribute">ngFor</span>=<span class="value">"#editItem of heroes"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt; <span class="attribute">hero-card</span></span><br><span class="line">            [<span class="attribute">hidden</span>]=<span class="value">"editItem.editing"</span></span><br><span class="line">            [<span class="attribute">hero</span>]=<span class="value">"editItem.item"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt; /<span class="attribute">hero-card</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt; <span class="attribute">button</span></span><br><span class="line">            [<span class="attribute">hidden</span>]=<span class="value">"editItem.editing"</span></span><br><span class="line">            (<span class="attribute">click</span>)=<span class="value">"editItem.editing = true"</span>&gt;</span></span><br><span class="line">              edit</span><br><span class="line">          <span class="tag">&lt; /<span class="attribute">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt; <span class="attribute">hero-editor</span></span><br><span class="line">            (<span class="attribute">saved</span>)=<span class="value">"onSaved(editItem, $event)"</span></span><br><span class="line">            (<span class="attribute">canceled</span>)=<span class="value">"onCanceled(editItem)"</span></span><br><span class="line">            [<span class="attribute">hidden</span>]=<span class="value">"!editItem.editing"</span></span><br><span class="line">            [<span class="attribute">hero</span>]=<span class="value">"editItem.item"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt; /<span class="attribute">hero-editor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt; /<span class="attribute">li</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>对于hero-editor这个component，它定义了(saved)和(canceled)这两个@Output，在按按键的时候发出这个事件，并且用restore service来更改内容，然后hero-list.component监听到这个事件，做除相应的保存或者返回操作。在这里要注意一点的是，在第一章博客我提到了用output传递参数，<br>在这里我们可以看到在保存的时候，在hero-editor.component里:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onSaved () &#123;</span><br><span class="line">   <span class="keyword">this</span>.saved.<span class="keyword">next</span>(<span class="keyword">this</span>.restoreService.getItem());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>它把这个当前的值传递了出去，而在hero-list.component监听的时候，<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; <span class="attribute">hero-editor</span></span><br><span class="line">    (<span class="attribute">saved</span>)=<span class="value">"onSaved(editItem, $event)"</span></span><br><span class="line">    (<span class="attribute">canceled</span>)=<span class="value">"onCanceled(editItem)"</span></span><br><span class="line">    [<span class="attribute">hidden</span>]=<span class="value">"!editItem.editing"</span></span><br><span class="line">    [<span class="attribute">hero</span>]=<span class="value">"editItem.item"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt; /<span class="attribute">hero-editor</span>&gt;</span></span><br><span class="line"></span><br><span class="line">onSaved (editItem: EditItem<span class="tag">&lt;<span class="title">Hero</span>&gt;</span>, updatedHero: Hero) &#123;</span><br><span class="line">    editItem.item = updatedHero;</span><br><span class="line">    editItem.editing = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参数通过event传递了过来，并且可以直接使用。在这里type就是传递时候的type。<br>再这个例子里，只有hero-editor基于restore的service，所以只有hero-editor加入了restore的service。由于有多个hero-editor，所以多个service会有多个实例。而heroes-service只需要在主模块里面使用，所以他是一个单例模式。</p>
+<h2 id="小结">小结</h2><p>这一个博客主要介绍了一下依赖注入，主要有下面几个知识点:</p>
+<ol>
+<li>在模块中加入service有两种方法，但由于service是单例模式的，所以不同的方法会有不同的行为，总体来说如果在app里面只需要一个实例存在可以把service加载根模块中，但如果每个模块都需要这个service则需要使用providers来插入service。</li>
+<li>service的provider可以不仅仅是类，也可是值或者是工厂。</li>
+<li>如果在service里面加入service需要@Injectable。</li>
+</ol>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2015/12/25/angular-dependency-injection/">Angular2 依赖注入</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 G 的个人博客">G</a></p>
+  <p><span>发布时间:</span>2015年12月25日 - 20时44分</p>
+  <p><span>最后更新:</span>2015年12月26日 - 20时08分</p>
+  <p>
+    <span>原始链接:</span><a class="post-url" href="/2015/12/25/angular-dependency-injection/" title="Angular2 依赖注入">http://gabriel0402.github.io/2015/12/25/angular-dependency-injection/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://gabriel0402.github.io/2015/12/25/angular-dependency-injection/　　作者: G" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.copy-path'); </script>
+</div>
+
+
+
+
+<nav id="article-nav">
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2015/12/24/angular2-form/">
+        Angular2 表单验证
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖注入介绍"><span class="toc-number">3.</span> <span class="toc-text">依赖注入介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体实例"><span class="toc-number">4.</span> <span class="toc-text">具体实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+  if ($(".toc").length < 1) {
+    $("#toc").css("display","none");
+    $("#tocButton").css("display","none");
+    $(".switch-btn").css("display","block");
+    $(".switch-area").css("display","block");
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+  <div class="duoshuo" id="comments">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/12/25/angular-dependency-injection/" data-title="Angular2 依赖注入" data-url="http://gabriel0402.github.io/2015/12/25/angular-dependency-injection/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"gabriel0402"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    <div  class="post-nav-button">
+    <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+    <a href="/2015/12/24/angular2-form/" title="下一篇: Angular2 表单验证">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+    
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2015 G
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+<script>
+  var backgroundnum = 10;
+  var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+
+  $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

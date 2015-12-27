@@ -105,6 +105,8 @@
 					<nav class="header-nav">
 						<ul class="social">
 							
+								<li id="RSS plugin"><a class="RSS plugin" target="_blank" href="http://gabriel0402.github.io/atom.xml" title="RSS plugin"></a></li>
+					        
 								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
 					        
 								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
@@ -120,7 +122,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Angular2/" style="font-size: 20px;">Angular2</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/form/" style="font-size: 10px;">form</a>
+						<a href="/tags/Angular2/" style="font-size: 20px;">Angular2</a> <a href="/tags/Angular2-教程/" style="font-size: 20px;">Angular2 教程</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a>
 					</div>
 				</section>
 				
@@ -183,6 +185,8 @@
 			<nav class="header-nav">
 						<ul class="social">
 							
+								<li id="RSS plugin"><a class="RSS plugin" target="_blank" href="http://gabriel0402.github.io/atom.xml" title="RSS plugin"></a></li>
+					        
 								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
 					        
 								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
@@ -197,6 +201,98 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-angular-dependency-injection" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/25/angular-dependency-injection/" class="article-date">
+  	<time datetime="2015-12-26T04:44:16.000Z" itemprop="datePublished">2015-12-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/25/angular-dependency-injection/">Angular2 依赖注入</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="前言">前言</h2><p>这是Angular2教程的第三部分，主要介绍Angular2的service的使用，以及ood在angular2里面的实现方式。相关博客如下：</p>
+<ol>
+<li><a href="http://gabriel0402.github.io/2015/12/21/overview/">Angular2 初探</a></li>
+<li><a href="http://gabriel0402.github.io/2015/12/24/angular2-form/">Angular2 表单验证</a></li>
+<li>Angular2之rxjs以及http的世界</li>
+<li>Angular2 cheatsheet</li>
+</ol>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Angular2/">Angular2</a><a class="article-category-link" href="/categories/Angular2/依赖注入/">依赖注入</a><a class="article-category-link" href="/categories/Angular2/依赖注入/Angular2-教程/">Angular2 教程</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2-教程/">Angular2 教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/依赖注入/">依赖注入</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/12/25/angular-dependency-injection/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
   
     <article id="post-angular2-form" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -215,7 +311,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/24/angular2-form/">Angular2 表格验证</a>
+      <a class="article-title" href="/2015/12/24/angular2-form/">Angular2 表单验证</a>
     </h1>
   
 
@@ -225,7 +321,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="前言">前言</h2><p>这是Angular2初探的第二部分，主要介绍Angular2的form的使用。相关博客如下：</p>
+              <h2 id="前言">前言</h2><p>这是Angular2教程的第二部分，主要介绍Angular2的form的使用。相关博客如下：</p>
 <ol>
 <li><a href="http://gabriel0402.github.io/2015/12/21/overview/">Angular2 初探</a></li>
 <li>Angular2 dependency injection</li>
@@ -241,13 +337,13 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Angular2/">Angular2</a><a class="article-category-link" href="/categories/Angular2/form/">form</a>
+	<a class="article-category-link" href="/categories/Angular2/">Angular2</a><a class="article-category-link" href="/categories/Angular2/form/">form</a><a class="article-category-link" href="/categories/Angular2/form/Angular2-教程/">Angular2 教程</a>
 	</div>
 
 
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/form/">form</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2-教程/">Angular2 教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/form/">form</a></li></ul>
 	</div>
 
       
@@ -333,13 +429,13 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Angular2/">Angular2</a>
+	<a class="article-category-link" href="/categories/Angular2/">Angular2</a><a class="article-category-link" href="/categories/Angular2/Angular2-教程/">Angular2 教程</a>
 	</div>
 
 
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2-教程/">Angular2 教程</a></li></ul>
 	</div>
 
       
