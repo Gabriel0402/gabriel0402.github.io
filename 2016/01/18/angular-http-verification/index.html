@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular2 Http注册登录验证 | Coding Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言这是Angular2教程的第四部分，主要介绍Angular2的http service的使用，由于angular2的http包含很多内容，所以这一段博客会分三个部分介绍，第一部分是介绍如何在angular2中使用http，如何配置http的header，body, params等等。并且会介绍一个简单的注册登录的例子。第二部分会介绍angular2的观察者模式以及rxjs。第三部分会具体介绍如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2 Http注册登录验证">
+<meta property="og:url" content="http://gabriel0402.github.io/2016/01/18/angular-http-verification/index.html">
+<meta property="og:site_name" content="Coding Notes">
+<meta property="og:description" content="前言这是Angular2教程的第四部分，主要介绍Angular2的http service的使用，由于angular2的http包含很多内容，所以这一段博客会分三个部分介绍，第一部分是介绍如何在angular2中使用http，如何配置http的header，body, params等等。并且会介绍一个简单的注册登录的例子。第二部分会介绍angular2的观察者模式以及rxjs。第三部分会具体介绍如">
+<meta property="og:updated_time" content="2016-01-19T08:02:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2 Http注册登录验证">
+<meta name="twitter:description" content="前言这是Angular2教程的第四部分，主要介绍Angular2的http service的使用，由于angular2的http包含很多内容，所以这一段博客会分三个部分介绍，第一部分是介绍如何在angular2中使用http，如何配置http的header，body, params等等。并且会介绍一个简单的注册登录的例子。第二部分会介绍angular2的观察者模式以及rxjs。第三部分会具体介绍如">
+  
+    <link rel="alternative" href="/atom.xml" title="Coding Notes" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">G</a></h1>
+		</hgroup>
+
+		
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Homepage</a></li>
+				        
+							<li><a href="/archives/">Archives</a></li>
+				        
+							<li><a href="/tags/">TagCloud</a></li>
+				        
+							<li><a href="/about/">About</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="RSS plugin"><a class="RSS plugin" target="_blank" href="http://gabriel0402.github.io/atom.xml" title="RSS plugin"></a></li>
+					        
+								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
+					        
+								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Gabriel0402" title="GitHub"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/3063179/gabriel" title="StackOverflow"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Angular2/" style="font-size: 20px;">Angular2</a> <a href="/tags/Angular2-教程/" style="font-size: 20px;">Angular2 教程</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/登录验证/" style="font-size: 10px;">登录验证</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">专注于黑科技</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">G</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">G</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Homepage</a></li>
+		        
+					<li><a href="/archives/">Archives</a></li>
+		        
+					<li><a href="/tags/">TagCloud</a></li>
+		        
+					<li><a href="/about/">About</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="RSS plugin"><a class="RSS plugin" target="_blank" href="http://gabriel0402.github.io/atom.xml" title="RSS plugin"></a></li>
+					        
+								<li id="Email"><a class="Email" target="_blank" href="mailto:mailto:zhucy0402@gmail.com" title="Email"></a></li>
+					        
+								<li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/1772183405/profile?topnav=1&wvr=6&is_all=1" title="新浪微博"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Gabriel0402" title="GitHub"></a></li>
+					        
+								<li id="StackOverflow"><a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/3063179/gabriel" title="StackOverflow"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-angular-http-verification" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/18/angular-http-verification/" class="article-date">
+  	<time datetime="2016-01-19T06:03:03.000Z" itemprop="datePublished">2016-01-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular2 Http注册登录验证
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Angular2/">Angular2</a><a class="article-category-link" href="/categories/Angular2/Http/">Http</a><a class="article-category-link" href="/categories/Angular2/Http/登录验证/">登录验证</a><a class="article-category-link" href="/categories/Angular2/Http/登录验证/Angular2-教程/">Angular2 教程</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2-教程/">Angular2 教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Http/">Http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/登录验证/">登录验证</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="前言">前言</h2><p>这是Angular2教程的第四部分，主要介绍Angular2的http service的使用，由于angular2的http包含很多内容，所以这一段博客会分三个部分介绍，第一部分是介绍如何在angular2中使用http，如何配置http的header，body, params等等。并且会介绍一个简单的注册登录的例子。第二部分会介绍angular2的观察者模式以及rxjs。第三部分会具体介绍如何在angular2中使用rxjs做restful data call的一些技巧。</p>
+<p>由于Angular2的官方并没有给出http的例子，而且api也还不完善，比如http还不支持form的header。所以小G在这里只是使用自己使用http的方法，并不是官方使用方法。</p>
+<ol>
+<li><a href="http://gabriel0402.github.io/2015/12/21/overview/">Angular2 初探</a></li>
+<li><a href="http://gabriel0402.github.io/2015/12/24/angular2-form/">Angular2 表单验证</a></li>
+<li>Angular2之rxjs以及http的世界</li>
+<li>Angular2 cheatsheet</li>
+</ol>
+<a id="more"></a>
+<h2 id="参考资料">参考资料</h2><p>还是小G上个博客里面介绍的例子，链接在这：[Angular 2 quick start][2]。文件结构如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">├──angular2/                                    </span><br><span class="line">│   │</span><br><span class="line">│   ├──app/                               </span><br><span class="line">│   │   ├──boot<span class="class">.ts</span>                          </span><br><span class="line">│   │   ├──app<span class="class">.component</span><span class="class">.ts</span>   </span><br><span class="line">│   │   ├──http-test/             <span class="comment">//依赖注入 用</span></span><br><span class="line">│   │       ├──http-test<span class="class">.component</span><span class="class">.ts</span></span><br><span class="line">│   ├──index<span class="class">.html</span></span><br><span class="line">│   ├──package<span class="class">.json</span>   <span class="comment">//用来安装我们需要的库， 以及node的一些命令</span></span><br><span class="line">│   ├──tsconfig<span class="class">.json</span>  <span class="comment">//用来配置typescript</span></span><br><span class="line">│   ├──style<span class="class">.css</span>      <span class="comment">//这个playground的css</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="后台程序">后台程序</h3><p>如果需要注册和登入的功能，我们首先需要一个后台服务。小G这里有一个很简单的注册登入的后台:<a href="https://github.com/auth0/nodejs-jwt-authentication-sample" target="_blank" rel="external">nodejs authentication</a>。这个后台的主要功能是用JWT(Json Web Token)实现用户注册登入。现在web app的验证方式主要为token验证，所以小G打算使用这个验证方式作为例子。</p>
+<p>使用方法如下：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/auth0/nodejs-jwt-authentication-sample.git</span><br><span class="line">npm install</span><br><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">server</span>.js</span><br></pre></td></tr></table></figure></p>
+<p>这样做了之后会在3001端口做一个后台，实现注册以及登录的功能。主要的api如下:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">POST</span> /users</span><br></pre></td></tr></table></figure></p>
+<p>这个可以通过post注册一个新用户，在post的body里面需要包含username,password,extra。然后他会返回一个token，用户可以在后续验证中在header中包括这个token进行验证。<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST <span class="regexp">/sessions/</span>create</span><br></pre></td></tr></table></figure></p>
+<p>这个可以让一个用户通过username和password进行login。在post的body里面需要包含username，password。同样返回一个token，用户也可以在后续验证中在header中包含这个token进行验证。<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/<span class="built_in">random</span>-<span class="constant">quote</span></span><br></pre></td></tr></table></figure></p>
+<p>这个是一个api来取随机名言，这个不需要验证。<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET <span class="regexp">/api/</span><span class="keyword">protected</span><span class="regexp">/random-quote</span></span><br></pre></td></tr></table></figure></p>
+<p>这个是一个api来取随机名言，需要使用注册或登录之后得到的token来进行验证。</p>
+<h3 id="Angular2_Http_Component">Angular2 Http Component</h3><h4 id="Angular2_Http_设置">Angular2 Http 设置</h4><p>在Angular2的官网上并没有Http的配置的教程，如果你使用的是我之前的SystemJs的配置，就需要在index.html中加入html的src:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; <span class="keyword">script</span> src=<span class="string">"https://code.angularjs.org/2.0.0-beta.0/http.dev.js"</span> &gt;&lt; /<span class="keyword">script</span> &gt;</span><br></pre></td></tr></table></figure></p>
+<p>Angular2暂时不能找到Http的module，还是需要加入源文件才能找到。但是有其他的tool比如webpack就可以把这些文件bundle起来可以直接在Component里面直接使用Http Provider。<br>在Dependency Injection里面我说过了service是一个singleton的模式，所以对于一个web app应该只需要一个http的service，所以我把他加入到bootstrap里面而不是在子模块里面。在Angular2 BETA里面Http的service要加入Http Providers的dependency injection，这样以后才能使用Http。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;HTTP_PROVIDERS&#125; <span class="keyword">from</span> <span class="string">'angular2/http'</span></span><br><span class="line">bootstrap(AppComponent,[HeroesService,HTTP_PROVIDERS]);</span><br></pre></td></tr></table></figure></p>
+<p>这样之后我们就可以在子模块中使用Http的service了。比如我写的HttpTestComponent,可以在constructor中加入http使得在这个模块中的所以函数都可以使用http service。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor"><span class="keyword">constructor</span>(http:Http)</span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getRandomQuote() &#123;</span><br><span class="line">        <span class="keyword">this</span>.http.get(<span class="string">'http://localhost:3001/api/random-quote'</span>)  <span class="comment">//1</span></span><br><span class="line">            .map(res =&gt; res.text())   <span class="comment">//2</span></span><br><span class="line">            .subscribe(  <span class="comment">//3</span></span><br><span class="line">                data =&gt; <span class="keyword">this</span>.randomQuote = data,</span><br><span class="line">                err =&gt; <span class="keyword">this</span>.logError(err),</span><br><span class="line">                () =&gt; <span class="built_in">console</span>.log(<span class="string">'Random Quote Complete'</span>)</span><br><span class="line">            );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>如上面这个例子，我们在constructor中插入了http，然后在getRandomQuote函数中就可以使用http service。下面我们具体讨论下Angular2 的http验证。</p>
+<h4 id="用户注册">用户注册</h4><p>通常app的验证方式是表单验证，表单通常包含用户名和密码。在前面的博客中我提到了怎么做表单的验证，这一章就不细说了。在template里面做好表单验证的html mock up，然后就开始做基于http的验证了。</p>
+<p>首先是注册的功能，从api里面可以看出，如果我们想要注册一个用户，我们需要提交用户名和密码。在这里简单介绍下auth验证方法。通常这种验证是你做一个data call，data call通常是post。然后在data call的body中加入验证信息，在这里就是用户名和密码，然后提交出去，后台服务器会验证这个信息，然后返回一个token。在后续的data call里面，需要在data call的header里面加入这个token来进行验证。一般token会expire，所以一段时间过后需要重新验证取得新的token。所以这是一个最简单的http登录模式。</p>
+<p>对于第一次取得token的过程，一般只是一个简单地验证，所以只要在header里面加入‘Content-Type‘为’application/x-www-form-urlencoded‘的验证信息即可。在javascript里面的http一般都支持header里面的form，但是angular2暂时还不支持，至少在RequestOptions里面我没有看到相关的api。但其实这个很好实现，只是一个简单的string，只要把所有的信息用string加起来即可：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> creds</span> = <span class="string">"username="</span> + username + <span class="string">"&amp;password="</span> + password；</span><br></pre></td></tr></table></figure>
+<p>然后就可以做post request来注册一个用户，我们可以来看一下angular2的http的api：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">post</span>(url: <span class="keyword">string, </span><span class="keyword">body: </span><span class="keyword">string, </span>options?: RequestOptionsArgs) : Observable&lt;Response&gt;</span><br></pre></td></tr></table></figure>
+<p>其中RequestOptionsArgs 包括: url,method,search,headers。</p>
+<p>所以在做post request的时候，我们首先需要一个url，可以从后台的api里看出是<a href="http://localhost:3001/users。" target="_blank" rel="external">http://localhost:3001/users。</a> 然后我们需要body，就是我们刚刚用用户名和密码构成的string。然后就是requestOptionsArgs，这个就是我们的data call需要的header。由于我们是提交一个表格的信息，所以‘Content-Type‘要设为为’application/x-www-form-urlencoded‘。具体如下：</p>
+<p>url：<a href="http://localhost:3001/users" target="_blank" rel="external">http://localhost:3001/users</a></p>
+<p>body： “username=” + username + “&amp;password=” + password + “&amp;extra=color”;</p>
+<p>RequestOptionsArgs：’Content-Type’:’application/x-www-form-urlencoded’</p>
+<p>根据这些信息，我们可以来做http data call。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">register(<span class="built_in">data</span>)&#123;</span><br><span class="line">       <span class="built_in">var</span> username = <span class="built_in">data</span><span class="built_in">.</span>username;</span><br><span class="line">       <span class="built_in">var</span> password = <span class="built_in">data</span><span class="built_in">.</span>password; </span><br><span class="line">       <span class="built_in">var</span> creds = <span class="string">"username="</span> + username + <span class="string">"&amp;password="</span> + password + <span class="string">"&amp;extra=color"</span>;</span><br><span class="line">       <span class="built_in">var</span> headers = <span class="literal">new</span> Headers();</span><br><span class="line">       headers<span class="built_in">.</span>append(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">       this<span class="built_in">.</span>http<span class="built_in">.</span>post(<span class="string">'http://localhost:3001/users'</span>, creds, &#123;</span><br><span class="line">            headers: headers</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="built_in">.</span><span class="built_in">map</span>(res =&gt; res<span class="built_in">.</span>json())</span><br><span class="line">            <span class="built_in">.</span>subscribe(</span><br><span class="line">             <span class="built_in">data</span> =&gt; console<span class="built_in">.</span><span class="keyword">log</span>(<span class="built_in">data</span>),</span><br><span class="line">             err =&gt; this<span class="built_in">.</span>logErr<span class="subst">or</span>(err),</span><br><span class="line">            () =&gt; console<span class="built_in">.</span><span class="keyword">log</span>(<span class="string">'Register Complete'</span>)</span><br><span class="line">       );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>从http的api可以看出，他返回的是一个observable类型，这是一个观察者类型，小G会在下一章具体介绍这个内容。可以先简单介绍一下，在rxjs里面，一切都是流，当你建立一个observable之后，你等于新建了一个流，然后rxjs里面有很多函数，这些函数让你可以合并，创建和过滤这些流。我们创建了这些流之后，我们并不需要去关注他，只有我们订阅(subscribe)了这个流，我们才会得到相应的结果。比如当我们用Angular2新建一个post request，我们就新建了一个数据流，对于这个数据流，我们可以映射数据流里面的数据，比如返回的是res，我们可以把它映射成json形态。然后当我们订阅这个数据流的时候，就可以看到数据流的变化。当然这么说会比较空洞，下一个rxjs我会具体结合图来解释这个基于数据流的观察者模式。但目前我们只要知道我们做了post request，然后把返回的数据变成json格式。</p>
+<p>就这样我们完成了注册的过程。而注册之后的response会在data里面显示。在response里会有验证用的token，但是暂时还不用保存在localstorage。</p>
+<h4 id="用户登录">用户登录</h4><p>和上面的用户注册一样，先用用户名和密码做post request，得到验证的token。不同的是在登录的时候我们要保存这个token。具体的方式在web app里面通常的方法是保存在localstorage里面，也就是通常浏览器的cookies&amp;cache里面。同样，post的api也发生了变化，所以如下:</p>
+<p>url：<a href="http://localhost:3001/sessions/create" target="_blank" rel="external">http://localhost:3001/sessions/create</a></p>
+<p>body： “username=” + username + “&amp;password=” + password + “&amp;extra=color”;</p>
+<p>RequestOptionsArgs：’Content-Type’:’application/x-www-form-urlencoded’</p>
+<p>当我们要保存token的时候，可以用:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.<span class="function"><span class="title">setItem</span><span class="params">(<span class="string">'id_token'</span>, jwt)</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="用户验证">用户验证</h4><p>刚刚保存在localstorage里面的token就可以在以后的过程中放在header的Authorization中使用。如下面的代码:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">getSecretQuote() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> jwt = localStorage.getItem(<span class="string">'id_token'</span>);</span><br><span class="line">        <span class="keyword">var</span> authHeader = <span class="keyword">new</span> Headers();</span><br><span class="line">        <span class="keyword">if</span>(jwt) &#123;</span><br><span class="line">            authHeader.append(<span class="string">'Authorization'</span>, <span class="string">'Bearer '</span> + jwt);      </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.http.<span class="literal">get</span>(<span class="string">'http://localhost:3001/api/protected/random-quote'</span>, &#123;</span><br><span class="line">            headers: authHeader</span><br><span class="line">        &#125;)</span><br><span class="line">        .map(res =&gt; res.text())</span><br><span class="line">        .subscribe(</span><br><span class="line">            data =&gt; <span class="keyword">this</span>.secretQuote = data,</span><br><span class="line">            err =&gt; <span class="keyword">this</span>.logError(err),</span><br><span class="line">            () =&gt; console.log(<span class="string">'Secret Quote Complete'</span>)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>首先我们从localstorage里面拿到保存的token，然后把它加入到header的Authorization中。通常token前面需要加bearer。然后和其他data call一样做get request。然后得到数据然后表示出来。</p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2016/01/18/angular-http-verification/">Angular2 Http注册登录验证</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 G 的个人博客">G</a></p>
+  <p><span>发布时间:</span>2016年01月18日 - 22时03分</p>
+  <p><span>最后更新:</span>2016年01月19日 - 00时02分</p>
+  <p>
+    <span>原始链接:</span><a class="post-url" href="/2016/01/18/angular-http-verification/" title="Angular2 Http注册登录验证">http://gabriel0402.github.io/2016/01/18/angular-http-verification/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://gabriel0402.github.io/2016/01/18/angular-http-verification/　　作者: G" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.copy-path'); </script>
+</div>
+
+
+
+
+<nav id="article-nav">
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2015/12/25/angular-dependency-injection/">
+        Angular2 依赖注入
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#后台程序"><span class="toc-number">2.1.</span> <span class="toc-text">后台程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Angular2_Http_Component"><span class="toc-number">2.2.</span> <span class="toc-text">Angular2 Http Component</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Angular2_Http_设置"><span class="toc-number">2.2.1.</span> <span class="toc-text">Angular2 Http 设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户注册"><span class="toc-number">2.2.2.</span> <span class="toc-text">用户注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户登录"><span class="toc-number">2.2.3.</span> <span class="toc-text">用户登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户验证"><span class="toc-number">2.2.4.</span> <span class="toc-text">用户验证</span></a></li></ol></li></ol></li></ol>
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+  if ($(".toc").length < 1) {
+    $("#toc").css("display","none");
+    $("#tocButton").css("display","none");
+    $(".switch-btn").css("display","block");
+    $(".switch-area").css("display","block");
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+  <div class="duoshuo" id="comments">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/01/18/angular-http-verification/" data-title="Angular2 Http注册登录验证" data-url="http://gabriel0402.github.io/2016/01/18/angular-http-verification/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"gabriel0402"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    <div  class="post-nav-button">
+    <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+    <a href="/2015/12/25/angular-dependency-injection/" title="下一篇: Angular2 依赖注入">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+    
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2016 G
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+<script>
+  var backgroundnum = 10;
+  var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+
+  $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+            
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
