@@ -92,18 +92,18 @@ export default {
   },
   'en-us': {
     brand: {
-      brandName: 'brandName',
-      briefIntroduction: 'some description of product',
+      brandName: 'Event-B',
+      briefIntroduction: 'A formal method for system-level modelling and analysis',
       buttons: [
         {
           text: 'Quick Start',
-          link: '/en-us/docs/demo1.html',
-          type: 'primary',
+          link: 'https://wiki.event-b.org/index.php/Event-B_Language',
+          type: 'normal',
         },
         {
-          text: 'View on Github',
-          link: '',
-          type: 'normal',
+          text: 'Rodin Tool Set',
+          link: 'https://sourceforge.net/projects/rodin-b-sharp/',
+          type: 'primary',
         },
       ],
     },
@@ -117,34 +117,34 @@ export default {
       list: [
         {
           img: '/img/feature_transpart.png',
-          title: 'feature1',
-          content: 'feature description',
+          title: 'modelling notation',
+          content: 'set theory as a modelling notation',
         },
         {
           img: '/img/feature_loadbalances.png',
-          title: 'feature2',
-          content: 'feature description',
+          title: 'refinement',
+          content: 'use of refinement to represent systems at different abstraction levels',
         },
         {
           img: '/img/feature_service.png',
-          title: 'feature3',
-          content: 'feature description',
+          title: 'proof',
+          content: 'use of mathematical proof to verify consistency between refinement levels',
         },
         {
           img: '/img/feature_hogh.png',
-          title: 'feature4',
-          content: 'feature description',
-        },
-        {
-          img: '/img/feature_runtime.png',
-          title: 'feature5',
-          content: 'feature description',
-        },
-        {
-          img: '/img/feature_maintenance.png',
-          title: 'feature6',
-          content: 'feature description',
+          title: 'tool support',
+          content: 'The Rodin Platform is an Eclipse-based IDE for Event-B that provides effective support for refinement and mathematical proof',
         }
+        // {
+        //   img: '/img/feature_runtime.png',
+        //   title: 'feature5',
+        //   content: 'feature description',
+        // },
+        // {
+        //   img: '/img/feature_maintenance.png',
+        //   title: 'feature6',
+        //   content: 'feature description',
+        // }
       ]
     },
     start: {
@@ -156,27 +156,27 @@ export default {
         link: '/en-us/docs/demo1.html',
       },
     },
-    users: {
-      title: 'users',
-      desc: <span>some description</span>,
-      list: [
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-      ],
-    },
+    // users: {
+    //   title: 'users',
+    //   desc: <span>some description</span>,
+    //   list: [
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //   ],
+    // },
   },
 };
