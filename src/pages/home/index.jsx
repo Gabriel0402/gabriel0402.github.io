@@ -44,7 +44,6 @@ class Home extends Language {
           <Header
             currentKey="home"
             type={headerType}
-            logo={headerLogo}
             language={language}
             onLanguageChange={this.onLanguageChange}
           />
@@ -94,7 +93,7 @@ class Home extends Language {
             <div className="right-part"><img src={getLink('/img/quick_start.png')} /></div>
           </div>
         </section>
-        <section className="users-section">
+        {/* <section className="users-section">
           <h3>{dataSource.users.title}</h3>
           <p>{dataSource.users.desc}</p>
           <div className="users">
@@ -104,7 +103,7 @@ class Home extends Language {
             ))
           }
           </div>
-        </section>
+        </section> */}
         <Footer logo="/img/dubbo_gray.png" language={language} />
       </div>
     );

@@ -30,7 +30,7 @@ export default {
     ],
     disclaimer: {
       title: 'Disclaimer',
-      content: 'the disclaimer content',
+      content: 'More information',
     },
     documentation: {
       title: 'Documentation',

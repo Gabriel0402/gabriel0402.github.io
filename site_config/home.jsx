@@ -67,28 +67,28 @@ export default {
         link: '/zh-cn/docs/demo1.html',
       },
     },
-    users: {
-      title: '用户',
-      desc: <span>简单描述</span>,
-      list: [
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-        '/img/users_alibaba.png',
-      ],
-    },
+    // users: {
+    //   title: '用户',
+    //   desc: <span>简单描述</span>,
+    //   list: [
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //     '/img/users_alibaba.png',
+    //   ],
+    // },
   },
   'en-us': {
     brand: {
@@ -98,12 +98,12 @@ export default {
         {
           text: 'Quick Start',
           link: 'https://wiki.event-b.org/index.php/Event-B_Language',
-          type: 'normal',
+          type: 'primary',
         },
         {
           text: 'Rodin Tool Set',
           link: 'https://sourceforge.net/projects/rodin-b-sharp/',
-          type: 'primary',
+          type: 'normal',
         },
       ],
     },
@@ -113,39 +113,39 @@ export default {
       img: '/img/architecture.png',
     },
     features: {
-      title: 'Feature List',
-      list: [
-        {
-          img: '/img/feature_transpart.png',
-          title: 'modelling notation',
-          content: 'set theory as a modelling notation',
-        },
-        {
-          img: '/img/feature_loadbalances.png',
-          title: 'refinement',
-          content: 'use of refinement to represent systems at different abstraction levels',
-        },
-        {
-          img: '/img/feature_service.png',
-          title: 'proof',
-          content: 'use of mathematical proof to verify consistency between refinement levels',
-        },
-        {
-          img: '/img/feature_hogh.png',
-          title: 'tool support',
-          content: 'The Rodin Platform is an Eclipse-based IDE for Event-B that provides effective support for refinement and mathematical proof',
-        }
-        // {
-        //   img: '/img/feature_runtime.png',
-        //   title: 'feature5',
-        //   content: 'feature description',
-        // },
-        // {
-        //   img: '/img/feature_maintenance.png',
-        //   title: 'feature6',
-        //   content: 'feature description',
-        // }
-      ]
+        title: 'Feature List',
+        list: [
+          {
+            img: '/img/feature_transpart.png',
+            title: 'modelling notation',
+            content: 'set theory as a modelling notation',
+          },
+          {
+            img: '/img/feature_loadbalances.png',
+            title: 'refinement',
+            content: 'use of refinement to represent systems at different abstraction levels',
+          },
+          {
+            img: '/img/feature_service.png',
+            title: 'proof',
+            content: 'use of mathematical proof to verify consistency between refinement levels',
+          },
+          {
+            img: '/img/feature_hogh.png',
+            title: 'tool support',
+            content: 'The Rodin Platform is an Eclipse-based IDE for Event-B that provides effective support for refinement and mathematical proof',
+          }
+          // {
+          //   img: '/img/feature_runtime.png',
+          //   title: 'feature5',
+          //   content: 'feature description',
+          // },
+          // {
+          //   img: '/img/feature_maintenance.png',
+          //   title: 'feature6',
+          //   content: 'feature description',
+          // }
+        ]
     },
     start: {
       title: 'Quick start',
