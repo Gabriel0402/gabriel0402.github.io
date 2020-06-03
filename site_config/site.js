@@ -62,7 +62,7 @@ export default {
         },
       ],
     },
-    copyright: 'Copyright © 2020 Event-B.org',
+    copyright: 'Copyright © 2020 Event-B Soton',
   },
   'zh-cn': {
     pageMenu: [

@@ -3,8 +3,8 @@ import React from 'react';
 export default {
   'zh-cn': {
     brand: {
-      brandName: '开源产品品牌名称',
-      briefIntroduction: '关于开源产品的简单介绍',
+      brandName: 'Event-B',
+      briefIntroduction: '系统级建模和分析的正式方法',
       buttons: [
         {
           text: '立即开始',
@@ -108,9 +108,9 @@ export default {
       ],
     },
     introduction: {
-      title: 'introduction title',
-      desc: 'some introduction of your product',
-      img: '/img/architecture.png',
+      title: 'Software Modelling',
+      desc: 'Software defects result in a lot of time-consuming test and fix of software and, if left undetected, have a detrimental impact on software users. A significant proportion of software defects arise in requirements and design phases but are only detected after coding phases when software is being tested or deployed. The use of formal modelling to clearly specify and analyse requirements and designs helps to eliminate many defects prior to coding.',
+      img: '/img/bmethod.png',
     },
     features: {
         title: 'Feature List',
@@ -149,11 +149,11 @@ export default {
     },
     start: {
       title: 'Quick start',
-      desc: 'some description text',
-      img: '/img/quick_start.png',
+      desc: 'start with Rodin tool set',
+      img: '/img/rodin.png',
       button: {
-        text: 'READ MORE',
-        link: '/en-us/docs/demo1.html',
+        text: 'Rodin Handbook',
+        link: 'https://www3.hhu.de/stups/handbook/rodin/current/html/',
       },
     },
     // users: {
